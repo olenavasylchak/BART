@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "keMFPglV52GnWZwo7aK/+P5LCaR244E7H3lqOTFsy//4602kyyC2vD6wWyfa2VIpqJtxEbPwUfEAu3KjEFsyAA==",
+  "dgSpecHash": "UhQQ1ffQra8tKZCQiVFdVQMnP7NPnWQiLUfCnGi6aJ0Jq6M01znfT/GWwzQTM/JWvc0jUtZCebDnpmBoJvYrSA==",
   "success": true,
-  "projectFilePath": "/Users/jsp/Projects/BART/BART/BART.csproj",
+  "projectFilePath": "/Users/jsp/Documents/GitHub/BART/BART/BART.csproj",
   "expectedPackageFiles": [
     "/Users/jsp/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
     "/Users/jsp/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.0/automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

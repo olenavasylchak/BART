@@ -1,0 +1,48 @@
+﻿<Properties StartupConfiguration="{9603ECBC-952D-47C8-84C6-9F228C7CA905}|https">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.BART PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="BART/Models/Dto/ContactDto.cs">
+    <Files>
+      <File FileName="BART/Models/Domain/Account.cs" Line="20" Column="1" />
+      <File FileName="BART/Models/Domain/Contact.cs" Line="1" Column="1" />
+      <File FileName="BART/Models/Domain/Incident.cs" Line="1" Column="1" />
+      <File FileName="BART/Mapping/DtoToDomainMappingProfile.cs" Line="1" Column="1" />
+      <File FileName="BART/Controllers/IncidentsController.cs" Line="27" Column="14" />
+      <File FileName="BART/Controllers/ContactsController.cs" Line="1" Column="1" />
+      <File FileName="BART/Controllers/AccountsController.cs" Line="1" Column="1" />
+      <File FileName="BART/Services/AccountService.cs" Line="1" Column="1" />
+      <File FileName="BART/Services/IncidentService.cs" Line="23" Column="6" />
+      <File FileName="BART/ApplicationContext.cs" Line="1" Column="1" />
+      <File FileName="BART/Program.cs" Line="12" Column="147" />
+      <File FileName="BART/Services/ContactService.cs" Line="18" Column="30" />
+      <File FileName="BART/Models/Dto/ContactDto.cs" Line="13" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="BART" expanded="True">
+            <Node name="BART" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Exceptions" expanded="True" />
+              <Node name="Interfaces" expanded="True" />
+              <Node name="Middleware" expanded="True" />
+              <Node name="Migrations" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="Domain" expanded="True" />
+                <Node name="Dto" expanded="True">
+                  <Node name="ContactDto.cs" selected="True" />
+                </Node>
+              </Node>
+              <Node name="Services" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

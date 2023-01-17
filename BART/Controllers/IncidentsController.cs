@@ -19,7 +19,7 @@ namespace BART.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody]IncidentDto incidentDto)
+        public IActionResult Post([FromBody] IncidentDto incidentDto)
         {
             if (incidentDto == null)
             {

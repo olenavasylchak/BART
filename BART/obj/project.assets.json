@@ -3977,11 +3977,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/jsp/Projects/BART/BART/BART.csproj",
+      "projectUniqueName": "/Users/jsp/Documents/GitHub/BART/BART/BART.csproj",
       "projectName": "BART",
-      "projectPath": "/Users/jsp/Projects/BART/BART/BART.csproj",
+      "projectPath": "/Users/jsp/Documents/GitHub/BART/BART/BART.csproj",
       "packagesPath": "/Users/jsp/.nuget/packages/",
-      "outputPath": "/Users/jsp/Projects/BART/BART/obj/",
+      "outputPath": "/Users/jsp/Documents/GitHub/BART/BART/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/jsp/.nuget/NuGet/NuGet.Config"

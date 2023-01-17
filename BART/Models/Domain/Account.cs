@@ -17,7 +17,6 @@ namespace BART.Models.Domain
 
         public int IncidentId { get; set; }
 
-        [ForeignKey("IncidentId")]
         public Incident? Incident { get; set; }
 
         public List<Contact> Contacts { get; set; }
