@@ -15,16 +15,10 @@ namespace BART.Models.Domain
 
         public string Name { get; set; }
 
-        public int IncidentId { get; set; }
+        public List<Incident> Incidents { get; set; }
 
-        public Incident? Incident { get; set; }
-
-        public List<Contact> Contacts { get; set; }
-
-        public Account()
-        {
-            Contacts = new List<Contact>();
-        }
+        public int ContactId { get; set; }
+        public Contact Contact { get; set; }
     }
 }
 

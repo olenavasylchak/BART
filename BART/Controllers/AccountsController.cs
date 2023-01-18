@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Net;
+
 using BART.Interfaces;
 using BART.Models;
 using BART.Models.Dto;
 using BART.Services;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace BART.Controllers
@@ -21,7 +23,7 @@ namespace BART.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(AccountDto), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<AccountDto>> Post([FromBody] AccountDto accountDto)
+        public async Task<ActionResult<AccountDto>> Post([FromBody] CreateAccountDto accountDto)
         {
             var result = await _accountService.CreateAccountAsync(accountDto);
             return Ok(result);

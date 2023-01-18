@@ -8,8 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer("Server=localhost; Database=EmployeeDB;User=SA; Password=12345OHdf%e; TrustServerCertificate=true"));
+builder.Services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer("Server=localhost; Database=BARTTestDB;User=SA; Password=12345OHdf%e; TrustServerCertificate=true"));
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IIncidentService, IncidentService>();

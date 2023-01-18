@@ -24,7 +24,7 @@ namespace BART.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(ContactDto), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<ContactDto>> Post([FromBody]ContactDto contactDto)
+        public async Task<ActionResult<ContactDto>> Post([FromBody]CreateContactDto contactDto)
         {
             var result = await _contactService.CreateContactAsync(contactDto);
             return Ok(result);

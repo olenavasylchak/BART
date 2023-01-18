@@ -8,6 +8,8 @@ using BART.Middleware;
 using BART.Models.Domain;
 using BART.Models.Dto;
 
+using Microsoft.EntityFrameworkCore;
+
 namespace BART.Services;
 
 	public class IncidentService : IIncidentService
@@ -22,35 +24,51 @@ namespace BART.Services;
         _mapper = mapper;
     }
 
-    public async Task<IncidentDto> CreateIncidentAsync(IncidentDto incidentDto)
+    public async Task<IncidentDto> CreateIncidentAsync(CreateIncidentDto incidentDto)
     {
-        var incident = _mapper.Map<Incident>(incidentDto);
+        var account = await _applicationContext.Accounts.FirstOrDefaultAsync(x => x.Name == incidentDto.AccountName);
 
-        if (incident.Accounts != null && incident.Accounts.Count != 0)
+        if (account == null)
         {
-            foreach (var account in incident.Accounts)
+            throw new NotFoundException("Account is not found");
+        }
+
+        var contact = await _applicationContext.Contacts.Include(c => c.Accounts).FirstOrDefaultAsync(c => c.Email == incidentDto.ContactEmail);
+
+        if (contact == null)
+        {
+            var newContact = new Contact()
             {
-                if (!_applicationContext.Accounts.Any(a => a.Name == account.Name))
-                {
-                    throw new NotFoundException();
-                }
+                FirstName = incidentDto.ContactFirstName,
+                LastName = incidentDto.ContactLastName,
+                Email = incidentDto.ContactEmail
+            };
 
-                foreach (var contact in account.Contacts)
-                {
-                    if (_applicationContext.Contacts.Any(c => c.Email == contact.Email))
-                    {
-                        var contactToUpdate = _applicationContext.Contacts.FirstOrDefault(c => c.Email == contact.Email);
+            await _applicationContext.Contacts.AddAsync(newContact);
 
-                        //Link contact to account
-
-                        _applicationContext.SaveChanges();
-                    }
-                }
+            account.Contact = newContact;
+        }
+        else
+        {
+            if (contact.Accounts.Any(a => a.Name == incidentDto.AccountName))
+            {
+                contact.FirstName = incidentDto.ContactFirstName;
+                contact.LastName = incidentDto.ContactLastName;
+            }
+            else
+            {
+                contact.FirstName = incidentDto.ContactFirstName;
+                contact.LastName = incidentDto.ContactLastName;
+                contact.Accounts.Add(account);
             }
         }
 
+        var incident = _mapper.Map<Incident>(incidentDto);
+        incident.Account = account;
+
         await _applicationContext.Incidents.AddAsync(incident);
         await _applicationContext.SaveChangesAsync();
+
         var createdIncidentDto = _mapper.Map<IncidentDto>(incident);
         return createdIncidentDto;
     }

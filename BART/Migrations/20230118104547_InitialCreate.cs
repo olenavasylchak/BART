@@ -11,15 +11,18 @@ namespace BART.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Incidents",
+                name: "Contacts",
                 columns: table => new
                 {
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Incidents", x => x.Name);
+                    table.PrimaryKey("PK_Contacts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -29,36 +32,32 @@ namespace BART.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    IncidentId = table.Column<int>(type: "int", nullable: false),
-                    IncidentName = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    ContactId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Accounts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Accounts_Incidents_IncidentName",
-                        column: x => x.IncidentName,
-                        principalTable: "Incidents",
-                        principalColumn: "Name",
+                        name: "FK_Accounts_Contacts_ContactId",
+                        column: x => x.ContactId,
+                        principalTable: "Contacts",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Contacts",
+                name: "Incidents",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AccountId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Contacts", x => x.Id);
+                    table.PrimaryKey("PK_Incidents", x => x.Name);
                     table.ForeignKey(
-                        name: "FK_Contacts_Accounts_AccountId",
+                        name: "FK_Incidents_Accounts_AccountId",
                         column: x => x.AccountId,
                         principalTable: "Accounts",
                         principalColumn: "Id",
@@ -66,9 +65,9 @@ namespace BART.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Accounts_IncidentName",
+                name: "IX_Accounts_ContactId",
                 table: "Accounts",
-                column: "IncidentName");
+                column: "ContactId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_Name",
@@ -77,29 +76,28 @@ namespace BART.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contacts_AccountId",
-                table: "Contacts",
-                column: "AccountId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Contacts_Email",
                 table: "Contacts",
                 column: "Email",
-                unique: true,
-                filter: "[Email] IS NOT NULL");
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Incidents_AccountId",
+                table: "Incidents",
+                column: "AccountId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Contacts");
+                name: "Incidents");
 
             migrationBuilder.DropTable(
                 name: "Accounts");
 
             migrationBuilder.DropTable(
-                name: "Incidents");
+                name: "Contacts");
         }
     }
 }

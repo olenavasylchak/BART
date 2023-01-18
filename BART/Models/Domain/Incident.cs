@@ -9,14 +9,10 @@ namespace BART.Models.Domain
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Name { get; set; }
-        public string? Description { get; set; }
+        public string Description { get; set; }
 
-        public List<Account> Accounts { get; set; }
-
-        public Incident()
-        {
-            Accounts = new List<Account>();
-        }
+        public int AccountId { get; set; }
+        public Account Account { get; set; }
     }
 }
 

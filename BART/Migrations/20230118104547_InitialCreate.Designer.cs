@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BART.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230117212946_InitialCreate")]
+    [Migration("20230118104547_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -32,12 +32,8 @@ namespace BART.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("IncidentId")
+                    b.Property<int>("ContactId")
                         .HasColumnType("int");
-
-                    b.Property<string>("IncidentName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -45,7 +41,7 @@ namespace BART.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IncidentName");
+                    b.HasIndex("ContactId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -61,25 +57,22 @@ namespace BART.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AccountId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountId");
-
                     b.HasIndex("Email")
-                        .IsUnique()
-                        .HasFilter("[Email] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Contacts");
                 });
@@ -90,29 +83,35 @@ namespace BART.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Name");
+
+                    b.HasIndex("AccountId");
 
                     b.ToTable("Incidents");
                 });
 
             modelBuilder.Entity("BART.Models.Domain.Account", b =>
                 {
-                    b.HasOne("BART.Models.Domain.Incident", "Incident")
+                    b.HasOne("BART.Models.Domain.Contact", "Contact")
                         .WithMany("Accounts")
-                        .HasForeignKey("IncidentName")
+                        .HasForeignKey("ContactId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Incident");
+                    b.Navigation("Contact");
                 });
 
-            modelBuilder.Entity("BART.Models.Domain.Contact", b =>
+            modelBuilder.Entity("BART.Models.Domain.Incident", b =>
                 {
                     b.HasOne("BART.Models.Domain.Account", "Account")
-                        .WithMany("Contacts")
+                        .WithMany("Incidents")
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -122,10 +121,10 @@ namespace BART.Migrations
 
             modelBuilder.Entity("BART.Models.Domain.Account", b =>
                 {
-                    b.Navigation("Contacts");
+                    b.Navigation("Incidents");
                 });
 
-            modelBuilder.Entity("BART.Models.Domain.Incident", b =>
+            modelBuilder.Entity("BART.Models.Domain.Contact", b =>
                 {
                     b.Navigation("Accounts");
                 });

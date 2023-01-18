@@ -8,7 +8,7 @@ namespace BART.Models.Dto
 
         public string Name { get; set; }
 
-        public List<ContactDto> Contacts { get; set; }
+        public ContactDto Contact { get; set; }
     }
 }
 
