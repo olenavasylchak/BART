@@ -6,7 +6,7 @@ namespace BART.Interfaces
 {
 	public interface IIncidentService
     {
-        Incident Add(IncidentDto incident);
+        Task<IncidentDto> CreateIncidentAsync(IncidentDto incidentDto);
     }
 }
 

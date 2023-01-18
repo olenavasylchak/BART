@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 using BART.Interfaces;
@@ -22,14 +23,10 @@ namespace BART.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody]ContactDto contactDto)
+        [ProducesResponseType(typeof(ContactDto), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<ContactDto>> Post([FromBody]ContactDto contactDto)
         {
-            if (contactDto == null)
-            {
-                return BadRequest("Contact is null.");
-            }
-
-            var result = _contactService.Add(contactDto);
+            var result = await _contactService.CreateContactAsync(contactDto);
             return Ok(result);
         }
     }

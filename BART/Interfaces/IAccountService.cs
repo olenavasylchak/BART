@@ -6,7 +6,7 @@ namespace BART.Interfaces
 {
 	public interface IAccountService
 	{
-        Account Add(AccountDto account);
+        Task<AccountDto> CreateAccountAsync(AccountDto accountDto);
     }
 }
 

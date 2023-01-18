@@ -1,8 +1,9 @@
 ﻿using System;
-
+using System.Net;
 using BART.Interfaces;
 using BART.Models;
 using BART.Models.Dto;
+using BART.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BART.Controllers
@@ -19,14 +20,10 @@ namespace BART.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] IncidentDto incidentDto)
+        [ProducesResponseType(typeof(IncidentDto), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IncidentDto>> Post([FromBody] IncidentDto incidentDto)
         {
-            if (incidentDto == null)
-            {
-                return BadRequest("Incident is null.");
-            }
-
-            var result = _incidentService.Add(incidentDto);
+            var result = await _incidentService.CreateIncidentAsync(incidentDto);
             return Ok(result);
         }
     }

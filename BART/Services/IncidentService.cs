@@ -22,13 +22,9 @@ namespace BART.Services;
         _mapper = mapper;
     }
 
-    public Incident Add(IncidentDto incidentDto)
+    public async Task<IncidentDto> CreateIncidentAsync(IncidentDto incidentDto)
     {
-        var incident = new Incident()
-        {
-            Description = incidentDto.Description,
-            Accounts = _mapper.Map<List<Account>>(incidentDto.Accounts)
-        };
+        var incident = _mapper.Map<Incident>(incidentDto);
 
         if (incident.Accounts != null && incident.Accounts.Count != 0)
         {
@@ -53,10 +49,10 @@ namespace BART.Services;
             }
         }
 
-        _applicationContext.Incidents.Add(incident);
-        _applicationContext.SaveChanges();
-
-        return incident;
+        await _applicationContext.Incidents.AddAsync(incident);
+        await _applicationContext.SaveChangesAsync();
+        var createdIncidentDto = _mapper.Map<IncidentDto>(incident);
+        return createdIncidentDto;
     }
 }
 

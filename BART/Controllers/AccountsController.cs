@@ -1,8 +1,9 @@
 ﻿using System;
-
+using System.Net;
 using BART.Interfaces;
 using BART.Models;
 using BART.Models.Dto;
+using BART.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BART.Controllers
@@ -17,16 +18,12 @@ namespace BART.Controllers
         {
             _accountService = accountService;
         }
-        
-        [HttpPost]
-        public IActionResult Post([FromBody]AccountDto accountDto)
-        {
-            if (accountDto == null)
-            {
-                return BadRequest("Account is null.");
-            }
 
-            var result = _accountService.Add(accountDto);
+        [HttpPost]
+        [ProducesResponseType(typeof(AccountDto), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<AccountDto>> Post([FromBody] AccountDto accountDto)
+        {
+            var result = await _accountService.CreateAccountAsync(accountDto);
             return Ok(result);
         }
     }

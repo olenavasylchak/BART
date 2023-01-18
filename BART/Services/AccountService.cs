@@ -18,19 +18,13 @@ public class AccountService : IAccountService
         _mapper = mapper;
 	}
 
-    public Account Add(AccountDto accountDto)
+    public async Task<AccountDto> CreateAccountAsync(AccountDto accountDto)
     {
-        var account = new Account()
-        {
-            Id = accountDto.Id,
-            Name = accountDto.Name,
-            Contacts = _mapper.Map<List<Contact>>(accountDto.Contacts)
-        };
-
-        _applicationContext.Accounts.Add(account);
-        _applicationContext.SaveChanges();
-
-        return account;
+        var account = _mapper.Map<Account>(accountDto);
+        await _applicationContext.Accounts.AddAsync(account);
+        await _applicationContext.SaveChangesAsync();
+        var createdAccountDto = _mapper.Map<AccountDto>(account);
+        return createdAccountDto;
     }
 }
 

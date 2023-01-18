@@ -6,7 +6,7 @@ namespace BART.Interfaces
 {
 	public interface IContactService
     {
-        Contact Add(ContactDto contact);
+        Task<ContactDto> CreateContactAsync(ContactDto contactDto);
     }
 }
 
