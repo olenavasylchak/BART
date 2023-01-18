@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BART.Services;
 
-	public class IncidentService : IIncidentService
-	{
+public class IncidentService : IIncidentService
+{
     private readonly IMapper _mapper;
 
     private readonly ApplicationContext _applicationContext;

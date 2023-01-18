@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace BART.Exceptions;
 
 public class NotFoundException : Exception

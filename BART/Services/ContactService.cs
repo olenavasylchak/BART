@@ -6,12 +6,10 @@ using BART.Interfaces;
 using BART.Models.Domain;
 using BART.Models.Dto;
 
-using Microsoft.EntityFrameworkCore;
-
 namespace BART.Services;
 
-	public class ContactService : IContactService
-	{
+public class ContactService : IContactService
+{
     private readonly IMapper _mapper;
 
     private readonly ApplicationContext _applicationContext;

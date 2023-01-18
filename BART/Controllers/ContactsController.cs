@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 
 using BART.Interfaces;
 using BART.Models;
 using BART.Models.Dto;
+using BART.Services;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace BART.Controllers
@@ -24,7 +23,7 @@ namespace BART.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(ContactDto), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<ContactDto>> Post([FromBody]CreateContactDto contactDto)
+        public async Task<ActionResult<ContactDto>> Post([FromBody] CreateContactDto contactDto)
         {
             var result = await _contactService.CreateContactAsync(contactDto);
             return Ok(result);

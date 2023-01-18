@@ -5,6 +5,7 @@ using AutoMapper;
 using BART.Interfaces;
 using BART.Models.Domain;
 using BART.Models.Dto;
+using Microsoft.EntityFrameworkCore;
 
 namespace BART.Services;
 
